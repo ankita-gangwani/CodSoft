@@ -1,0 +1,80 @@
+import javax.swing.*;
+import java.util.*;
+
+class PeopleInfo{
+    String Name;
+    String Address;
+    String PhoneNumber;
+    
+    PeopleInfo(String n, String a, String p){
+        Name = n;
+        Address = a;
+        PhoneNumber = p;
+    }
+    void display(){
+    JOptionPane.showMessageDialog(null, "Name : "+Name+"Address : "+Address+"Phone No : "+PhoneNumber);
+    }
+}
+
+class AddressBook{
+    ArrayList persons;
+    
+    AddressBook(){
+        persons = new ArrayList();
+    }
+    
+    void AddPerson(){
+        String name = JOptionPane.showInputDialog("Enter Name : ");
+        String add = JOptionPane.showInputDialog("Enter Adress : ");
+        String phno = JOptionPane.showInputDialog("Enter Phone No : ");
+        
+        PeopleInfo p = new PeopleInfo(name, add, phno);
+        persons.add(p);
+    }
+    
+    void SearchPerson(String n){
+        for(int i=0 ; i<persons.size() ; i++){
+            PeopleInfo p = (PeopleInfo) persons.get(i);
+            if(n.equals(p.Name)){
+                p.display();
+            }
+        }
+    }
+    
+    void DeletePerson(String n){
+        for(int i=0 ; i<persons.size() ; i++){
+            PeopleInfo p = (PeopleInfo) persons.get(i);
+            if(n.equals(p.Name)){
+                persons.remove(i);
+            }
+        }
+    }
+}
+
+ class Test {
+    public static void main(String[] args) {
+        AddressBook obj = new AddressBook();
+        String input, s;
+        int ch;
+        
+        while(true){
+            input = JOptionPane.showInputDialog("Enter 1 to Add\nEnter 2 to Search\nEnter 3 to Delete\nEnter 4 to Exit");
+            ch = Integer.parseInt(input);
+            
+            switch(ch){
+                case 1 : obj.AddPerson();
+                break;
+                case 2 : 
+                    s = JOptionPane.showInputDialog("Enter Name to Search : ");
+                    obj.SearchPerson(s);
+                break;
+                case 3 : 
+                    s = JOptionPane.showInputDialog("Enter Name to Delete : ");
+                    obj.DeletePerson(s);
+                break;
+                case 4 : System.exit(0);
+                break;
+            }
+        }
+    }
+}
