@@ -1,0 +1,104 @@
+import java.util.*;
+
+class ATM{
+    int Balance;
+    int PIN = 1818;
+    
+    public void VerifyPin(){
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter Your PIN : ");
+        int EnteredPin = sc.nextInt();
+        
+        if(EnteredPin == PIN){
+            menu();
+        }
+        else{
+            System.out.println("Invalid PIN");
+        }
+    }
+    
+    public void Menu(){
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Please select the Option !");
+        System.out.println("1. Check A/c Balance");
+        System.out.println("2. Cash Withdraw");
+        System.out.println("3. Cash Deposit");
+        System.out.println("4. Exit");
+        
+        int option = sc.nextInt();
+        
+        switch(option){
+            case 1 : BalanceCheck();
+            break;
+            case 2 : WithdrawCash();
+            break;
+            case 3 : DepositCash();
+            break;
+            case 4 : Exit();
+            break;
+            default : System.out.println("Invalid Option");
+            menu();
+        }
+    }
+    
+    public void BalanceCheck(){
+        System.out.println("Your A/c Balance is : "+Balance+"\n");
+        menu();
+    }
+    
+    public void WithdrawCash(){
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Enter amount to Withdraw : ");
+        int wdamt = sc.nextInt();
+        
+        if(wdamt>Balance){
+            System.out.println("Insufficient Balance !");
+        }
+        else{
+            Balance = Balance - wdamt;
+            System.out.println("Cash Withdrawn Successfully !\n");
+        }
+        menu();
+    }
+    
+    public void DepositCash(){
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Enter amount to Deposit : ");
+        int dpamt = sc.nextInt();
+        Balance = Balance + dpamt;
+        System.out.println("Cash Deposited Successfully !\n");
+        
+        menu();
+    }
+    
+    public void Exit(){
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Thanks For Your Kind Visit !\nWould You Like to Continue !\n     1. Yes\n     2. No");
+        int input = sc.nextInt();
+        
+        if(input == 1){
+            menu();
+        }
+        else if(input == 2){
+            System.out.println("Okay, You can remove your Card !");
+        }
+        else{
+            System.out.println("Invalid Input");
+            Exit();
+        }
+    }
+}
+
+
+class ATMMachine
+{
+    public static void main(String[] args) {
+        ATM obj = new ATM();
+        obj.CheckPin();
+    }
+}
